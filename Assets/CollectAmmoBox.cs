@@ -36,6 +36,11 @@ public class CollectAmmoBox : MonoBehaviour
 
 
        } 
+
+        else if (Input.GetButtonDown("Fire1") && ammo = 0) {
+            AudioSource na = GetComponent<AudioSource>();
+            na.Play();
+            }
     }
 
     void OnTriggerEnter(Collider other) {
