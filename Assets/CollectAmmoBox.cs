@@ -3,10 +3,14 @@ using UnityEngine;
 public class CollectAmmoBox : MonoBehaviour
 {
     public int ammo;
+    public AudioSource na;
+    public AudioClip reload;
+    public AudioClip empty;
+    public AudioClip full;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+          na = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -15,6 +19,8 @@ public class CollectAmmoBox : MonoBehaviour
         //If you left click and amno is greater than 0 the ammo will go down.
         if (Input.GetButtonDown("Fire1") && ammo > 0) {
             ammo--;
+            na.clip = full;
+            na.Play();
            
             //Setting the Origin and Direction to the RedDot. 
             Ray ray =  Camera.main.ViewportPointToRay(new Vector3(0.5f ,0.5f ,0.0f));
@@ -33,20 +39,19 @@ public class CollectAmmoBox : MonoBehaviour
                 Animation a = g.transform.parent.GetComponent<Animation>();
                 a.Play("LowerBridge");    
             }
-
-
        } 
-
-        else if (Input.GetButtonDown("Fire1") && ammo = 0) {
-            AudioSource na = GetComponent<AudioSource>();
-            na.Play();
-            }
+        else if (Input.GetButtonDown("Fire1") && ammo == 0) {
+           na.clip = empty;
+           na.Play();
+       }
     }
 
     void OnTriggerEnter(Collider other) {
         //Collision with a specific object.
         if (other.gameObject.name == "AmmoBox") {
             ammo = 20;
+            na.clip = reload;
+            na.Play();
             //.SetActive(false) disables the object.
             other.gameObject.SetActive(false);
        }

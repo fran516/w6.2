@@ -17,8 +17,10 @@ public class OpenDoor : MonoBehaviour
     void OnTriggerEnter(Collider other) {
         if(other.gameObject.tag == "Player") {
           GameObject parent = transform.parent.gameObject;
-        Animation animation = parent.GetComponent<Animation>();
-        animation.Play("OpenDoor");  
+          Animation animation = parent.GetComponent<Animation>();
+          AudioSource da = GetComponent<AudioSource>();
+          animation.Play("OpenDoor");  
+          da.Play();
         }
         
     }
