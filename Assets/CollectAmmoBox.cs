@@ -3,14 +3,15 @@ using UnityEngine;
 public class CollectAmmoBox : MonoBehaviour
 {
     public int ammo;
-    public AudioSource na;
+    public AudioSource audio;
     public AudioClip reload;
     public AudioClip empty;
     public AudioClip full;
+    public AudioClip bridgeDown;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-          na = GetComponent<AudioSource>();
+          audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -19,8 +20,8 @@ public class CollectAmmoBox : MonoBehaviour
         //If you left click and amno is greater than 0 the ammo will go down.
         if (Input.GetButtonDown("Fire1") && ammo > 0) {
             ammo--;
-            na.clip = full;
-            na.Play();
+            audio.clip = full;
+            audio.Play();
            
             //Setting the Origin and Direction to the RedDot. 
             Ray ray =  Camera.main.ViewportPointToRay(new Vector3(0.5f ,0.5f ,0.0f));
@@ -37,12 +38,13 @@ public class CollectAmmoBox : MonoBehaviour
             //If the object that has been hit is the target. The bridge will lower by playing the animation.
             if (g.name == "Target") {
                 Animation a = g.transform.parent.GetComponent<Animation>();
-                a.Play("LowerBridge");    
+                a.Play("LowerBridge");
+                audio.clip = reload;     
             }
        } 
         else if (Input.GetButtonDown("Fire1") && ammo == 0) {
-           na.clip = empty;
-           na.Play();
+           audio.clip = bridgeDown;
+           audio.Play();
        }
     }
 
@@ -50,8 +52,8 @@ public class CollectAmmoBox : MonoBehaviour
         //Collision with a specific object.
         if (other.gameObject.name == "AmmoBox") {
             ammo = 20;
-            na.clip = reload;
-            na.Play();
+            audio.clip = reload;
+            audio.Play();
             //.SetActive(false) disables the object.
             other.gameObject.SetActive(false);
        }
