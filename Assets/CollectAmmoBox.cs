@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CollectAmmoBox : MonoBehaviour
 {
-    public int ammo;
+    public int ammo = 0;
     public AudioSource na;
     public AudioClip reload;
     public AudioClip empty;
