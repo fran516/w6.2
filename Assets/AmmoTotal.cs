@@ -13,8 +13,8 @@ public class AmmoTotal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int ammoValue = player.GetComponent<CollectAmmoBox>().ammo;
-        Text text = GetComponent<Text>();
-        text.text = ammoValue.ToString();
+   //     int ammoValue = player.GetComponent<CollectAmmoBox>().ammo;
+   //     Text text = GetComponent<Text>();
+    //    text.text = ammoValue.ToString();
     }
 }
